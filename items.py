@@ -43,6 +43,7 @@ class Item:
         self.prompt = None
         self.details = None
         self.category = None
+        self.main_category = data["main_category"]
         self.parse(data)
 
 
@@ -99,7 +100,7 @@ class Item:
         """
         Set the prompt instance variable to be a prompt appropriate for training
         """
-        self.prompt = f"{self.QUESTION}\n\n{text}\n\n"
+        self.prompt = f"{self.QUESTION}\n\nMain_Category: {self.main_category}\n\n{text}\n\n"
         self.prompt += f"{self.PREFIX}{str(round(self.price))}.00"
 
         self.token_count = len(Item.tokenizer.encode(self.prompt, add_special_tokens=False))
@@ -128,23 +129,24 @@ class Item:
 #     "price": 1400,
 #     "description": ["The Dell Inspiron 14 offers a perfect balance between portability and performance. With its sleek aluminum design and ultra-slim profile, it’s ideal for both students and professionals. The 14-inch Full HD display delivers vibrant colors and crisp visuals for work, streaming, or browsing."],
 #     "features": "Intel Core i5 12th Gen processor for fast multitasking 8GB DDR4 RAM and 512GB SSD for smooth, reliable performance, Backlit keyboard and fingerprint reader for convenience and security",
-#     "details": "Product Dimensions: 12.7 x 8.6 x 0.7 inches, Item Weight: 3.08 pounds, Operating System: Windows 11 Home, Manufacturer: Dell"
+#     "details": "Product Dimensions: 12.7 x 8.6 x 0.7 inches, Item Weight: 3.08 pounds, Operating System: Windows 11 Home, Manufacturer: Dell",
+#     "main_category": "Electronics"
 # }
+#
+# item = Item(amazon_data, 122)
 
-# item = Item(amazon_data, amazon_data)
-
-# ### Test if details are properly scrubbed:
-# print(item.details) # Original Details
+### Test if details are properly scrubbed:
+# print(item.prompt)
 # print(item.scrub_details()) # Scrubbed details
 
 
-# ### Test the scrub() method:
+### Test the scrub() method:
 # scrubbed = item.scrub("[,,,this is a great product that escalates the efficiency at work{}   ]")
 # print(scrubbed)
 # print(type(scrubbed))
 
 
-# ### Parse() test:
+### Parse() test:
 
 # item.parse(amazon_data)
 # print(item.prompt)

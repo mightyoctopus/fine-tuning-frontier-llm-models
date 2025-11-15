@@ -9,6 +9,13 @@ COLOR_MAP = {"red": RED, "orange": YELLOW, "green": GREEN}
 
 
 class Tester:
+    """
+    Utility for evaluating and visualizing price prediction models.
+    
+    Args: 
+        predictor: (Callable[Item], float) A function that carries out price prediction.
+        data: (List[Item]) Test data to be provided for testing 
+    """
 
     def __init__(self, predictor, data, title=None, size=250):
         self.predictor = predictor
