@@ -47,7 +47,7 @@ class ItemLoader:
 
     def chunk_generator(self):
         """
-        Iterate over the Dataset, yielding chunks of datapoints at a time (as an index-range     generator)
+        Iterate over the Dataset, yielding chunks of datapoints at a time (as an index-range   generator)
         """
         size = len(self.dataset)
         for i in range(0, size, CHUNK_SIZE):
